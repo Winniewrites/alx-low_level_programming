@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 
 /**
@@ -21,5 +22,3 @@ int main(void)
 	printf("%ld\n", py);
 	return (0);
 }
-Footer
-
