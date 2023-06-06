@@ -1,11 +1,44 @@
-#include "lists.h"
-/**
-  * print_listint_safe - define function
-  * @head:
-  * Return: what does it return?
-  */
+#include <stdio.h>
+#include <stdlib.h>
+#include "lists.h"  // Assuming you have a header file named "lists.h" that defines the listint_t structure
+
 size_t print_listint_safe(const listint_t *head)
 {
-	head++;
-	return (0);
+    const listint_t *slow = head;
+    const listint_t *fast = head;
+    size_t count = 0;
+
+    if (head == NULL) {
+        return 0;
+    }
+
+    while (fast != NULL && fast->next != NULL)
+    {
+        printf("[%p] %d\n", (void *)slow, slow->n);
+        count++;
+
+        slow = slow->next;
+        fast = fast->next->next;
+
+        if (slow == fast)
+        {
+            printf("[%p] %d\n", (void *)slow, slow->n);
+            printf("-> [%p] %d\n", (void *)fast->next, fast->next->n);
+            count++;
+            break;
+        }
+    }
+
+    if (fast == NULL || fast->next == NULL)
+    {
+        while (slow != NULL)
+        {
+            printf("[%p] %d\n", (void *)slow, slow->n);
+            count++;
+            slow = slow->next;
+        }
+    }
+
+    return count;
 }
+
