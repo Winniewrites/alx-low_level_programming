@@ -1,52 +1,36 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include "lists.h"  
-
+#include "lists.h"
 
 /**
- * print_listint_safe - prints a linked list, safely
- * @head: list of type listint_t to print
- *
- * Return: number of nodes in the list
+ * print_listint_safe - print all the elements of listint_t
+ * @head: the head of the list
+ * Return: number of nodes
  */
-
 size_t print_listint_safe(const listint_t *head)
 {
-    const listint_t *slow = head;
-    const listint_t *fast = head;
-    size_t count = 0;
+	size_t nodes = 0;
+	size_t dist;
+	const listint_t *ptr = head;
+	const listint_t *nxt;
 
-    if (head == NULL) {
-        return 0;
-    }
+	while (ptr)
+	{
+		printf("[%p] %d\n", (void *)ptr, ptr->n);
 
-    while (fast != NULL && fast->next != NULL)
-    {
-        printf("[%p] %d\n", (void *)slow, slow->n);
-        count++;
+		nodes++;
+		ptr = ptr->next;
+		nxt = head;
 
-        slow = slow->next;
-        fast = fast->next->next;
-
-        if (slow == fast)
-        {
-            printf("[%p] %d\n", (void *)slow, slow->n);
-            printf("-> [%p] %d\n", (void *)fast->next, fast->next->n);
-            count++;
-            break;
-        }
-    }
-
-    if (fast == NULL || fast->next == NULL)
-    {
-        while (slow != NULL)
-        {
-            printf("[%p] %d\n", (void *)slow, slow->n);
-            count++;
-            slow = slow->next;
-        }
-    }
-
-    return count;
+		dist = 0;
+		while (dist < nodes)
+		{
+			if (ptr == nxt)
+			{
+				printf("-> [%p] %d\n", (void *)ptr, ptr->n);
+				return (nodes);
+			}
+			nxt = nxt->next;
+			dist++;
+		}
+	}
+	return (nodes);
 }
-
