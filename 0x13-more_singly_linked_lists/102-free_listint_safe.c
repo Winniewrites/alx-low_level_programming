@@ -1,6 +1,11 @@
 #include <stdlib.h>
-#include "lists.h"  // Assuming you have a header file named "lists.h" that defines the listint_t structure
-
+#include "lists.h" 
+/**
+ * free_listint_safe - frees a linked list
+ * @h: pointer to the first node in the linked list
+ *
+ * Return: number of elements in the freed list
+ */
 size_t free_listint_safe(listint_t **head)
 {
     size_t count = 0;
