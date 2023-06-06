@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include <stdlib.h>
 #include "lists.h"
 
 /**
@@ -28,6 +28,6 @@ size_t free__listint_safe(listint_t **head)
     }
 
     *head = NULL;
-    return (len);
+    return count;
 }
 
