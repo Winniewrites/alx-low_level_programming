@@ -4,12 +4,15 @@
   * get_endianness - returns processor endianness
   * Return: 0 if big endian, 1 if little endian
   */
+
 int get_endianness(void)
 {
-	int i;
-	char *test;
+	unsigned int n;
+	char *c = (char *) &n;
 
-	i = 1;
-	test = (char *)&i;
-	return ((int)test[0]);
+	n = 1;
+	if (*c)
+		return (1);
+	else
+		return (0);
 }
