@@ -1,55 +1,25 @@
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include <stdio.h>
-#include <stdlib.h>
 #include "main.h"
-
+#include <stdio.h>
 /**
- * append_text_to_file - function that appends text at the end of a file.
- *
- * @filename: name of the file and text_content
- * @text_content: content text of file
- *
- * Return:1 on success, -1 on failure
- * Return 1 if the file exists and -1 if the file does not exist or if you do
- * not have the required permissions to write the file
- * if filename is NULL return -1
- */
+  * append_text_to_file - appends text to a file
+  * @filename: file to append to, if NULL, return -1
+  * @text_content: content to append, if NULL, do not append
+  * Return: 1 on success, -1 on failure
+  */
 int append_text_to_file(const char *filename, char *text_content)
 {
-	int da;
-	size_t l;
-	ssize_t wr;
+	int append_file, len, wr_stat;
 
-	if (!filename)
-	{
+	if (filename == NULL)
 		return (-1);
-	}
-
-	da = open(filename, O_RDWR | O_APPEND, 0600);
-	if (da == -1)
-	{
+	append_file = open(filename, O_WRONLY | O_APPEND);
+	if (append_file == -1)
 		return (-1);
-	}
-
-	if (!text_content)
-	{
-		close(da);
+	if (text_content == NULL)
 		return (1);
-	}
-
-	for (l = 0; text_content[l] != '\0'; l++)
-	{
+	for (len = 0; text_content[len]; len++)
 		;
-	}
-
-	wr = write(da, text_content, l);
-	if (wr == -1)
-	{
-		return (-1);
-	}
-	close(da);
-	return (1);
+	wr_stat = write(append_file, text_content, len);
+	close(append_file);
+	return (wr_stat == -1 ? -1 : 1);
 }
