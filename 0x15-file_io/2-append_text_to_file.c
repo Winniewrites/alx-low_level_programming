@@ -3,9 +3,6 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-
-#include "holberton.h"
-
 /**
  * _strlen - compute the length of a NULL-terminated string
  * @str: the string to measure
